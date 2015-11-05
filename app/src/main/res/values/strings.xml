@@ -11,4 +11,6 @@
     <string name="action_example">Example action</string>
 
     <string name="action_settings">Settings</string>
+    <string name="service_start_btn">Start service</string>
+    <string name="service_stop_btn">Stop service</string>
 </resources>

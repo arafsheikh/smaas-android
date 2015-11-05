@@ -1,4 +1,4 @@
-package com.smaas;
+package com.smaas.activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -12,6 +12,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.smaas.R;
+import com.smaas.fragments.NavigationDrawerFragment;
 
 public class MainActivity extends AppCompatActivity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {

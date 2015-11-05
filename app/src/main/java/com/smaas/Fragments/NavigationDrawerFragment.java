@@ -1,6 +1,7 @@
-package com.smaas;
+package com.smaas.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -22,7 +23,10 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-public class NavigationDrawerFragment extends Fragment {
+import com.smaas.R;
+import com.smaas.services.ProcessDataService;
+
+public class NavigationDrawerFragment extends Fragment implements View.OnClickListener {
 
     /**
      * Remember the position of the selected item.
@@ -61,7 +65,7 @@ public class NavigationDrawerFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         // Read in the flag indicating whether or not the user has demonstrated awareness of the
-        // drawer. See PREF_USER_LEARNED_DRAWER for details.
+        // drawer.
         SharedPreferences sp = PreferenceManager.getDefaultSharedPreferences(getActivity());
         mUserLearnedDrawer = sp.getBoolean(PREF_USER_LEARNED_DRAWER, false);
 
@@ -102,6 +106,11 @@ public class NavigationDrawerFragment extends Fragment {
                         getString(R.string.title_section3),
                 }));
         mDrawerListView.setItemChecked(mCurrentSelectedPosition, true);
+
+        // Buttons to start/stop the main service
+        mDrawerListView.findViewById(R.id.service_start_btn).setOnClickListener(this);
+        mDrawerListView.findViewById(R.id.service_stop_btn).setOnClickListener(this);
+
         return mDrawerListView;
     }
 
@@ -263,6 +272,17 @@ public class NavigationDrawerFragment extends Fragment {
 
     private ActionBar getActionBar() {
         return ((AppCompatActivity) getActivity()).getSupportActionBar();
+    }
+
+    @Override
+    public void onClick(View v) {
+        int id = v.getId();
+        if (id == R.id.service_start_btn) {
+            getActivity().startService(new Intent(getActivity(), ProcessDataService.class));
+        }
+        if (id == R.id.service_stop_btn) {
+            getActivity().stopService(new Intent(getActivity(), ProcessDataService.class));
+        }
     }
 
     /**
